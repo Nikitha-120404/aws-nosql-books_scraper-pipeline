@@ -1,29 +1,27 @@
-📚 AWS NoSQL Books Data Pipeline
-
-(Web Scraping → Amazon DocumentDB → Transformation → Amazon DynamoDB)
-
+📚 AWS NoSQL Books Data Pipeline (Web Scraping + DocumentDB + DynamoDB)
 📌 Project Overview
 
-This project implements an end-to-end AWS NoSQL data pipeline using Python.
-Book data is scraped from a public website, stored as raw documents in Amazon DocumentDB, transformed and cleaned, and then loaded into Amazon DynamoDB for scalable NoSQL storage and querying.
+This project demonstrates a complete end-to-end NoSQL data pipeline on AWS using web-scraped book data.
 
-The pipeline reflects a real-world data engineering workflow executed via terminal (PuTTY/SSH) in an AWS environment.
+The pipeline extracts book information from a public website, stores raw unstructured data in Amazon DocumentDB, transforms and cleans the data using Python, and loads the processed records into Amazon DynamoDB for scalable NoSQL storage.
 
-🎯 Key Features
+This project reflects real-world data engineering practices, including web scraping, NoSQL data modeling, data transformation, and cloud-based database integration using AWS services.
 
-Web scraping of book metadata using Python
+🎯 Project Objective
 
-Raw data storage in Amazon DocumentDB (MongoDB-compatible)
+To build a cloud-based NoSQL data pipeline that:
 
-Data cleaning and transformation
+Scrapes book data from the web using Python
 
-Structured data ingestion into Amazon DynamoDB
+Stores raw data in Amazon DocumentDB
 
-Terminal-based validation and querying
+Cleans and transforms unstructured data
 
-Secure TLS-based database connections
+Loads structured data into Amazon DynamoDB
 
-🛠 Tech Stack
+Validates stored data using terminal-based queries
+
+🛠️ Technologies Used
 
 Programming Language: Python
 
@@ -43,25 +41,25 @@ Infrastructure Access: PuTTY / SSH
 
 Data Format: JSON
 
-🔄 Data Pipeline Workflow
+🔄 Data Pipeline Architecture
 
-Scrape book data from a public website
+Extract book data from a public website using web scraping
 
-Store raw scraped data in Amazon DocumentDB
+Store raw scraped data as JSON documents in Amazon DocumentDB
 
-Read data from DocumentDB
+Read raw data from DocumentDB
 
-Transform and clean data:
+Transform data:
 
-Remove currency symbols from prices
+Clean price values
 
-Convert ratings from text to numeric values
+Convert ratings from text to numeric
 
 Add ingestion timestamps
 
 Load transformed records into Amazon DynamoDB
 
-Validate data by querying DocumentDB via terminal
+Validate data using DocumentDB queries via terminal
 
 📂 Project Structure
 aws-nosql-books-pipeline/
@@ -82,43 +80,33 @@ aws-nosql-books-pipeline/
 ├── requirements.txt
 └── .gitignore
 
-📜 Script Description
-1️⃣ scrape_to_docdb.py
+⚙️ Implementation Details
+🔹 Web Scraping & Raw Data Storage
 
-Scrapes book title, price, stock status, rating, and image URL
+Scrapes book title, price, stock availability, rating, and image URL
 
-Connects securely to Amazon DocumentDB using TLS
+Stores raw data in Amazon DocumentDB using secure TLS connections
 
-Inserts raw book documents into DocumentDB
+🔹 Data Transformation
 
-2️⃣ transform_and_loadto_dynamodb.py
+Cleans currency symbols from prices
 
-Reads raw data from DocumentDB
+Converts rating values from text to numeric form
 
-Cleans and transforms data:
+Adds ingestion timestamps for tracking
 
-Price → numeric (Decimal)
+🔹 NoSQL Data Loading
 
-Rating → integer (1–5)
+Inserts transformed data into Amazon DynamoDB using boto3
 
-Adds ingestion timestamp
+Ensures scalable and efficient NoSQL storage
 
-Loads transformed records into Amazon DynamoDB using boto3
-
-3️⃣ viewdata_in_docdb.py
-
-Connects to Amazon DocumentDB
-
-Retrieves and displays sample records
-
-Used for data validation and verification
-
-⚙️ How to Run the Project
+▶️ How to Run the Project
 Prerequisites
 
 Python 3.x
 
-AWS Account
+AWS account
 
 Amazon DocumentDB cluster
 
@@ -126,59 +114,56 @@ Amazon DynamoDB table
 
 AWS credentials configured
 
-TLS certificate (global-bundle.pem)
+TLS certificate for DocumentDB
 
 Install Dependencies
 pip install -r requirements.txt
 
-Run the Pipeline
-# Step 1: Scrape and store data in DocumentDB
+Execute Pipeline
+# Scrape and store data in DocumentDB
 python scrape_to_docdb.py
 
-# Step 2: Transform and load data into DynamoDB
+# Transform data and load into DynamoDB
 python transform_and_loadto_dynamodb.py
 
-# Step 3: View stored data from DocumentDB
+# View sample data from DocumentDB
 python viewdata_in_docdb.py
 
-🔐 Security Note
+🔐 Security Considerations
 
-⚠️ Sensitive credentials are not included in this repository.
-All secrets such as:
+Sensitive information such as:
 
 AWS credentials
 
-Database usernames/passwords
+Database usernames and passwords
 
 TLS certificates
 
-should be stored securely using environment variables or configuration files and excluded via .gitignore.
+are not included in this repository and should be managed securely using environment variables or configuration files excluded via .gitignore.
 
-📸 Results
+📊 Project Outcomes
 
-Successfully scraped book data from the web
+Successfully scraped and stored book data in Amazon DocumentDB
 
-Raw data stored in Amazon DocumentDB
+Transformed unstructured data into structured format
 
-Cleaned and transformed data loaded into Amazon DynamoDB
+Loaded cleaned data into Amazon DynamoDB
 
-Data verified through terminal-based queries
-
-(Screenshots available in the outputs/screenshots/ directory)
+Verified data using terminal-based queries
 
 🚀 Future Enhancements
 
+Add pagination to scrape multiple pages
+
 Automate pipeline using AWS Lambda
 
-Add pagination for scraping multiple pages
+Add logging and error handling
 
-Implement error logging and retry mechanisms
+Integrate analytics using AWS Athena or QuickSight
 
-Add data analytics using Athena or QuickSight
-
-Schedule pipeline with Amazon EventBridge
+Schedule pipeline execution with Amazon EventBridge
 
 👩‍💻 Author
 
-Nikitha (Nikki)
+Siva Nikitha 
 Aspiring Data Engineer | AWS | Python | NoSQL | Data Pipelines
